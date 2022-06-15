@@ -57,6 +57,37 @@ def delExtFiles(srcDir,ext,recursion=False):
         elif recursion==True:
             delExtFiles(srcPath,ext,recursion)
 
+#删除文件夹下所有文件【类似unix下的 rm -r aa/bb】
+def rmDirAllFiles(dstDir):
+    lists=os.listdir(dstDir)
+    for lt in lists:
+        srcPath=os.path.join(dstDir,lt)
+        if os.path.isfile(srcPath):
+            os.remove(srcPath)
+        else:
+            shutil.rmtree(srcPath)
+
+#复制文件
+def copyFile(srcFile,dstFile):
+    if os.path.isfile(srcFile):
+        shutil.copyfile(srcFile,dstFile)
+
+#复制文件到指定目录【类似unix下 cp .xx bb】
+def copyFileToDir(srcFile,dstDir):
+    if os.path.isfile(srcFile):
+        tu=os.path.split(srcFile)
+        copyFile(srcFile,os.path.join(dstDir,tu[1]))
+
+#删除文件【类似unix下 rm aa.xx】
+def rmFile(fullPath):
+    if os.path.isfile(fullPath):
+        os.remove(fullPath)
+
+#删除文件夹【类似unix下 rm -r aa】
+def rmFloder(dstDir):
+    if os.path.exists(dstDir):
+        shutil.rmtree(dstDir)
+
 
 
 
